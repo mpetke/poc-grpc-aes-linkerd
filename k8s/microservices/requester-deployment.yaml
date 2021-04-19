@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: requester-grpc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: requester-grpc
+  template:
+    metadata:
+      labels:
+        app: requester-grpc
+      annotations:
+        linkerd.io/inject: enabled
+    spec:
+      containers:
+      - name: requester-grpc
+        image: mpetke/requester-grpc
+        imagePullPolicy: Always

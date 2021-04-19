@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: ambassador
+  name: aes-ingress
+spec:
+  rules:
+    - host: localhost
+      http:
+        paths:
+        - path: /client
+          backend:
+            serviceName: client-grpc
+            servicePort: 8085
+---
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: grpc-mapping
+spec:
+  prefix: /api.Echo/
+  rewrite: /api.Echo/
+  service: echo-grpc:8081
+  grpc: True

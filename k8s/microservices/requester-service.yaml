@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: requester-grpc
+spec:
+  selector:
+    app: requester-grpc
+  type: ClusterIP
+  ports:
+  - name: none
+    protocol: TCP
+    port: 8084
